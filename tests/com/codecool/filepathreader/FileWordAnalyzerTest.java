@@ -15,7 +15,7 @@ class FileWordAnalyzerTest {
         fpr.setup(filePath, fromLine, toLine);
         FileWordAnalyzer fwa = new FileWordAnalyzer(fpr);
         String[] expected = new String[]{
-                "Aenean", "commodo", "dolor", "eget", "ligula"
+                "aenean", "commodo", "dolor", "eget", "ligula"
         };
         String[] outcome = fwa.getWordsOrderedAlphabetically();
         assertArrayEquals(expected, outcome);
