@@ -23,4 +23,16 @@ public class FilePathReader {
     public Integer getToLine() {
         return toLine;
     }
+
+    public void setup(String filePath, Integer fromLine, Integer toLine) {
+        if (toLine < fromLine) {
+            throw new IllegalArgumentException("toLine is smaller than fromLine");
+        } else if (fromLine < 1) {
+            throw new IllegalArgumentException("fromLine is smaller than 1");
+        }
+
+        this.filePath = filePath;
+        this.fromLine = fromLine;
+        this.toLine = toLine;
+    }
 }
