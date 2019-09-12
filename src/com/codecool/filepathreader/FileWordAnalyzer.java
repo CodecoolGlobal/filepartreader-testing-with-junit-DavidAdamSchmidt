@@ -37,11 +37,27 @@ public class FileWordAnalyzer {
         }
     }
 
+    public List<String> getWordsWhichPalindromes() {
+        try {
+            List<String> words = getWords();
+            return words
+                    .stream()
+                    .filter(this::isPalindrome)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
     private List<String> getWords() throws IOException {
         String text = filePathReader.readLines();
         text = text.replaceAll("\\.", "");
         text = text.replaceAll(",", "");
         text = text.toLowerCase();
         return Arrays.asList(text.split("\\s+"));
+    }
+
+    private boolean isPalindrome(String word) {
+        return word.equals(new StringBuilder(word).reverse().toString());
     }
 }

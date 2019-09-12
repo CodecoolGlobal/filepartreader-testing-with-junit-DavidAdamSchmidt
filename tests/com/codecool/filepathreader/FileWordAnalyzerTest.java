@@ -68,4 +68,17 @@ class FileWordAnalyzerTest {
         List<String> outcome = fwa.getWordsContainingSubstring(substring);
         assertEquals(expected, outcome);
     }
+
+    @Test
+    public void testGetWordsWhichPalindromes() {
+        Integer fromLine = 1, toLine = 15;
+        FilePathReader fpr = new FilePathReader();
+        fpr.setup(filePath, fromLine, toLine);
+        FileWordAnalyzer fwa = new FileWordAnalyzer(fpr);
+        List<String> expected = Arrays.asList(
+                "a", "a", "lol"
+        );
+        List<String> outcome = fwa.getWordsWhichPalindromes();
+        assertEquals(expected, outcome);
+    }
 }
