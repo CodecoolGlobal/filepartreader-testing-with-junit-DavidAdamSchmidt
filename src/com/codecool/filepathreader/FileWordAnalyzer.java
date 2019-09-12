@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileWordAnalyzer {
 
@@ -15,15 +16,32 @@ public class FileWordAnalyzer {
 
     public List<String> getWordsOrderedAlphabetically() {
         try {
-            String text = filePathReader.readLines();
-            text = text.replaceAll("\\.", "");
-            text = text.toLowerCase();
-            List<String> words = Arrays.asList(text.split("\\s+"));
+            List<String> words = getWords();
             words.sort(Comparator.naturalOrder());
             return words;
 
         } catch (IOException e) {
             return null;
         }
+    }
+
+    public List<String> getWordsContainingSubstring(String subString) {
+        try {
+            List<String> words = getWords();
+            return words
+                    .stream()
+                    .filter(word -> word.contains(subString))
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    private List<String> getWords() throws IOException {
+        String text = filePathReader.readLines();
+        text = text.replaceAll("\\.", "");
+        text = text.replaceAll(",", "");
+        text = text.toLowerCase();
+        return Arrays.asList(text.split("\\s+"));
     }
 }

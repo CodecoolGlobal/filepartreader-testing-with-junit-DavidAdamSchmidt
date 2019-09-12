@@ -39,4 +39,33 @@ class FileWordAnalyzerTest {
         List<String> outcome = fwa.getWordsOrderedAlphabetically();
         assertEquals(expected, outcome);
     }
+
+    @Test
+    public void testGetWordsContainingSubstring_word() {
+        Integer fromLine = 1, toLine = 15;
+        String substring = "aenean";
+        FilePathReader fpr = new FilePathReader();
+        fpr.setup(filePath, fromLine, toLine);
+        FileWordAnalyzer fwa = new FileWordAnalyzer(fpr);
+        List<String> expected = Arrays.asList(
+                "aenean", "aenean", "aenean", "aenean"
+        );
+        List<String> outcome = fwa.getWordsContainingSubstring(substring);
+        assertEquals(expected, outcome);
+    }
+
+    @Test
+    public void testGetWordsContainingSubstring_chars() {
+        Integer fromLine = 1, toLine = 15;
+        String substring = "el";
+        FilePathReader fpr = new FilePathReader();
+        fpr.setup(filePath, fromLine, toLine);
+        FileWordAnalyzer fwa = new FileWordAnalyzer(fpr);
+        List<String> expected = Arrays.asList(
+                "elit", "felis", "pellentesque", "vel", "felis",
+                "elementum", "eleifend", "tellus", "eleifend"
+        );
+        List<String> outcome = fwa.getWordsContainingSubstring(substring);
+        assertEquals(expected, outcome);
+    }
 }
