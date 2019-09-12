@@ -1,5 +1,10 @@
 package com.codecool.filepathreader;
 
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class FilePathReader {
 
     private String filePath;
@@ -34,5 +39,10 @@ public class FilePathReader {
         this.filePath = filePath;
         this.fromLine = fromLine;
         this.toLine = toLine;
+    }
+
+    public String read() throws IOException {
+        Path path = FileSystems.getDefault().getPath(filePath);
+        return new String(Files.readAllBytes(path));
     }
 }
