@@ -2,6 +2,8 @@ package com.codecool.filepathreader;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class FileWordAnalyzer {
 
@@ -11,13 +13,13 @@ public class FileWordAnalyzer {
         this.filePathReader = filePathReader;
     }
 
-    public String[] getWordsOrderedAlphabetically() {
+    public List<String> getWordsOrderedAlphabetically() {
         try {
             String text = filePathReader.readLines();
             text = text.replaceAll("\\.", "");
             text = text.toLowerCase();
-            String[] words = text.split("\\s+");
-            Arrays.sort(words);
+            List<String> words = Arrays.asList(text.split("\\s+"));
+            words.sort(Comparator.naturalOrder());
             return words;
 
         } catch (IOException e) {
