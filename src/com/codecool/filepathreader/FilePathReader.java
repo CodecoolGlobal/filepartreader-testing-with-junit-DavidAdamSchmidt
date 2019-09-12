@@ -45,4 +45,12 @@ public class FilePathReader {
         Path path = FileSystems.getDefault().getPath(filePath);
         return new String(Files.readAllBytes(path));
     }
+
+    public String readLines() throws IOException {
+        String[] allLines = read().split("\n");
+        int size = toLine - fromLine + 1;
+        String[] applicableLines = new String[size];
+        System.arraycopy(allLines, fromLine - 1, applicableLines, 0, size);
+        return String.join("\n", applicableLines);
+    }
 }
